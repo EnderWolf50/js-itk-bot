@@ -1,6 +1,6 @@
 module.exports = {
   name: 'ping',
-  category: 'info',
+  dirname: __dirname,
   description: "Get the bot's ping.",
   execute: async (client, msg, args) => {
     msg.reply({

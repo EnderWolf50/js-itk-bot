@@ -14,8 +14,14 @@
 
 + client
   + [ ] `load`
+    + [ ] `loadCommand`
+    + [ ] `loadSlash`
   + [ ] `unload`
-  + [x] `reload`
+    + [ ] `unloadCommand`
+    + [ ] `unloadSlash`
+  + [ ] `reload` *(use unload & load to achieve)*
+    + [ ] `reloadCommand`
+    + [ ] `reloadSlash`
   + [ ] `settings` | `config`
 + info
   + [x] `ping`

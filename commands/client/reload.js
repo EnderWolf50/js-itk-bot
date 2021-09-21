@@ -1,6 +1,9 @@
-const reloadFile = (collection, name, path) => {
-  delete require.cache[require.resolve(path)];
-  collection.delete(name);
+const reloadFile = (collection, command) => {
+  const path = `${command.dirname}/${command.name}.js`;
+  delete require.cache[
+    require.resolve(`${command.dirname}/${command.name}.js`)
+  ];
+  collection.delete(command.name);
 
   const file = require(path);
   collection.set(file.name, file);
@@ -12,11 +15,7 @@ const reloadCommand = (client, name) => {
     return `The command **${name}** does not exist`;
 
   const command = client.commands.get(name);
-  const file = reloadFile(
-    client.commands,
-    name,
-    `${process.cwd()}/commands/${command.category}/${command.name}.js`
-  );
+  const file = reloadFile(client.commands, command);
 
   return `The command **${name}** has been reloaded`;
 };
@@ -26,11 +25,7 @@ const reloadSlashCommand = async (client, name) => {
     return `The command **${name}** does not exist`;
 
   const command = client.slashCommands.get(name);
-  const file = reloadFile(
-    client.slashCommands,
-    name,
-    `${process.cwd()}/slashCommands/${command.category}/${command.name}.js`
-  );
+  const file = reloadFile(client.slashCommands, command);
 
   if (!client.config.testing) {
     const oldCommand = client.application.commands.cache.find(
@@ -53,7 +48,7 @@ const reloadSlashCommand = async (client, name) => {
 
 module.exports = {
   name: 'reload',
-  category: 'client',
+  dirname: __dirname,
   description:
     'Nothing but a command that can reload the specified command or event.',
   ownerOnly: true,

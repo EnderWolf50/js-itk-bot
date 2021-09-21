@@ -17,7 +17,7 @@ module.exports = (client) => {
     let replyContent;
     if (cmd.guildOnly && !msg.guild)
       replyContent = `This command can only be used in the guild`;
-    if (cmd.ownerOnly && msg.author.id != client.config.ownerId)
+    else if (cmd.ownerOnly && msg.author.id != client.config.ownerId)
       replyContent = `This command can only be used by the owner`;
 
     if (replyContent) {
