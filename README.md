@@ -15,7 +15,7 @@
 + client
   + [ ] `load`
   + [ ] `unload`
-  + [ ] `reload`
+  + [x] `reload`
   + [ ] `settings` | `config`
 + info
   + [ ] `ping`
