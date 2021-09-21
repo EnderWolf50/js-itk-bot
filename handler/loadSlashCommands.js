@@ -12,12 +12,10 @@ module.exports = (client) => {
   });
 
   client.on('ready', async () => {
-    if (!client.config.testing) {
-      await client.application.commands.set(slashCommandsArray);
-      return;
-    }
+    if (!client.config.testing)
+      return client.application.commands.set(slashCommandsArray);
 
-    await client.guilds.cache
+    client.guilds.cache
       .get(client.config.testGuildId)
       ?.commands.set(slashCommandsArray);
   });

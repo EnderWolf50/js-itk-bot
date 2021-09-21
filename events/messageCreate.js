@@ -14,8 +14,20 @@ module.exports = (client) => {
       );
     if (!cmd) return;
 
-    if (cmd.guildOnly && !msg.guild) return;
-    if (cmd.ownerOnly && !msg.author.id != client.config.ownerId) return;
+    let replyContent;
+    if (cmd.guildOnly && !msg.guild)
+      replyContent = `This command can only be used in the guild`;
+    if (cmd.ownerOnly && msg.author.id != client.config.ownerId)
+      replyContent = `This command can only be used by the owner`;
+
+    if (replyContent) {
+      return msg.reply({ content: replyContent }).then((repliedMsg) => {
+        setTimeout(() => {
+          msg.delete().catch(console.log);
+          repliedMsg.delete().catch(console.log);
+        }, 5000);
+      });
+    }
 
     await cmd.execute(client, msg, args);
   });

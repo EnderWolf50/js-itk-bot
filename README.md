@@ -18,7 +18,7 @@
   + [x] `reload`
   + [ ] `settings` | `config`
 + info
-  + [ ] `ping`
+  + [x] `ping`
   + [ ] `help`
   + [ ] `invite`
 + utils

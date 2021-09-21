@@ -60,7 +60,7 @@ module.exports = {
   execute: async (client, msg, args) => {
     const [type, name] = args;
 
-    let replyContent = '';
+    let replyContent;
     switch (type) {
       case 'c' || 'cmd' || 'command':
         replyContent = reloadCommand(client, name);
@@ -71,14 +71,12 @@ module.exports = {
       default:
         replyContent = `Unknown command type ${type}`;
     }
-    await msg
-      .reply({ content: replyContent })
-      .then((repliedMsg) =>
-        setTimeout(() => {
-          msg.delete();
-          repliedMsg.delete();
-        }, 3000)
-      )
-      .catch(console.error);
+
+    const repliedMsg = await msg.reply({ content: replyContent });
+
+    setTimeout(() => {
+      msg.delete().catch(console.log);
+      repliedMsg.delete().catch(console.log);
+    }, 5000);
   },
 };
