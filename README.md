@@ -6,9 +6,9 @@
 
 ### handlers
 
-+ [ ] load commands
-+ [ ] load slash commands
-+ [ ] load events
++ [x] load commands
++ [x] load slash commands
++ [x] load events
 
 ### commands
 
