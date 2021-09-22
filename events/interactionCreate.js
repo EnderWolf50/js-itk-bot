@@ -8,8 +8,11 @@ module.exports = (client) => {
           ephemeral: true,
         });
       }
-
-      cmd.execute(client, interaction);
+      try {
+        cmd.run(client, interaction);
+      } catch (error) {
+        console.error(error);
+      }
     } else if (interaction.isContextMenu()) {
     }
   });

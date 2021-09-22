@@ -1,11 +1,13 @@
 lockfileVersion: 5.3
 
 specifiers:
+  cli-table: ^0.3.6
   discord.js: ^13.1.0
   dotenv: ^10.0.0
   glob: ^7.1.7
 
 dependencies:
+  cli-table: 0.3.6
   discord.js: 13.1.0
   dotenv: 10.0.0
   glob: 7.1.7
@@ -75,6 +77,18 @@ packages:
   /callsites/3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
+    dev: false
+
+  /cli-table/0.3.6:
+    resolution: {integrity: sha512-ZkNZbnZjKERTY5NwC2SeMeLeifSPq/pubeRoTpdr3WchLlnZg6hEgvHkK5zL7KNFdd9PmHN8lxrENUwI3cE8vQ==}
+    engines: {node: '>= 0.2.0'}
+    dependencies:
+      colors: 1.0.3
+    dev: false
+
+  /colors/1.0.3:
+    resolution: {integrity: sha1-BDP0TYCWgP3rYO0mDxsMJi6CpAs=}
+    engines: {node: '>=0.1.90'}
     dev: false
 
   /combined-stream/1.0.8:

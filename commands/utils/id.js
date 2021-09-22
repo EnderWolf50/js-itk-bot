@@ -1,9 +1,10 @@
 module.exports = {
   name: 'id',
-  dirname: __dirname,
   description: 'Get the id of user / emoji / channel / guild',
-  execute: async (client, msg, args) => {
-    const id = /<(?:a?:.*:|@!?&?|#)(\d+)>/.exec(args[0]);
-    msg.reply(`The id of ${args[0]} is \`${id[1]}\``);
+  run: async (client, msg, args) => {
+    const match = /<(?:a?:.*:|@!?&?|#)(\d+)>/.exec(args[0]);
+    if (!match) return msg.reply(`Unknown input ${args[0]}`);
+
+    msg.reply(`The id of ${args[0]} is \`${match[1]}\``);
   },
 };

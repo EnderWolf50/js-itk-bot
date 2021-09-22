@@ -1,19 +1,22 @@
-const glob = require('glob');
 const dotenv = require('dotenv');
-const { Client, Intents, Collection } = require('discord.js');
+const { Intents } = require('discord.js');
+const ItkBot = require('./base/ItkBot');
 
 dotenv.config();
 
-const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+const client = new ItkBot({
+  intents: [
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+    Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
+  ],
 });
 
-client.commands = new Collection();
-client.slashCommands = new Collection();
-client.config = require('./config.json');
-
-require('./handler/loadCommands.js')(client);
-require('./handler/loadEvents.js')(client);
-require('./handler/loadSlashCommands.js')(client);
+(async () => {
+  client.loadAllCommands(`${process.cwd()}/commands`);
+  client.loadAllEvents(`${process.cwd()}/events`);
+  client.loadAllSlashes(`${process.cwd()}/slashCommands`);
+})();
 
 client.login(process.env.TOKEN);

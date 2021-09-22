@@ -19,9 +19,9 @@
   + [ ] `unload`
     + [ ] `unloadCommand`
     + [ ] `unloadSlash`
-  + [ ] `reload` *(use unload & load to achieve)*
-    + [ ] `reloadCommand`
-    + [ ] `reloadSlash`
+  + [x] `reload` *(use unload & load to achieve)*
+    + [x] `reloadCommand`
+    + [x] `reloadSlash`
   + [ ] `settings` | `config`
 + info
   + [x] `ping`

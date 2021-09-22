@@ -15,7 +15,9 @@ module.exports = (client) => {
     if (!cmd) return;
 
     let replyContent;
-    if (cmd.guildOnly && !msg.guild)
+    if (cmd.args && !args.length)
+      replyContent = `This command requires additional arguments to run`;
+    else if (cmd.guildOnly && !msg.guild)
       replyContent = `This command can only be used in the guild`;
     else if (cmd.ownerOnly && msg.author.id != client.config.ownerId)
       replyContent = `This command can only be used by the owner`;
@@ -29,6 +31,6 @@ module.exports = (client) => {
       });
     }
 
-    await cmd.execute(client, msg, args);
+    await cmd.run(client, msg, args);
   });
 };
