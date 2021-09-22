@@ -9,7 +9,7 @@ module.exports = (client) => {
         });
       }
       try {
-        cmd.run(client, interaction);
+        cmd.run({ client: client, interaction: interaction });
       } catch (error) {
         console.error(error);
       }

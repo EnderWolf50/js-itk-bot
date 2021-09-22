@@ -3,7 +3,7 @@ module.exports = {
   description: 'Nothing but a command that can reload the specified command.',
   args: true,
   ownerOnly: true,
-  run: async (client, msg, args) => {
+  run: async ({ client, msg, args }) => {
     const [type, name] = args;
 
     let replyContent;

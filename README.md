@@ -29,9 +29,9 @@
   + [ ] `invite`
 + utils
   + [x] `id` *(user, guild, channel, emoji)*
-  + [ ] `poll` | `vote`
+  + [x] `poll` | `vote`
   + [ ] `clean`
-  + [ ] `choose`
+  + [x] `choose`
   + [ ] `calculate` *(w/ mode switch)*
   + [ ] `translate`
   + [ ] `imageSearch`
