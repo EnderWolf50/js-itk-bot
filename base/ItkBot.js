@@ -1,8 +1,7 @@
 const fs = require('fs');
+const Table = require('cli-table');
 const { Collection } = require('discord.js');
 const { Client } = require('discord.js');
-const Table = require('cli-table');
-const { dirname } = require('path');
 
 class ItkBot extends Client {
   constructor(options) {

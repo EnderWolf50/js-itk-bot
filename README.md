@@ -28,7 +28,7 @@
   + [ ] `help`
   + [ ] `invite`
 + utils
-  + [ ] `id` *(user, guild, channel, emoji)*
+  + [x] `id` *(user, guild, channel, emoji)*
   + [ ] `poll` | `vote`
   + [ ] `clean`
   + [ ] `choose`
