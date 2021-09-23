@@ -6,25 +6,25 @@ bot:
   name       : &BOT_NAME "Itk Bot"
   description: "知らない..."
 
-  owner: &BOT_OWNER 523755296242270210
+  owner: &BOT_OWNER "523755296242270210"
   moderators:
     - *BOT_OWNER
-    - 590430031281651722 # Traveler
-    - 546614210243854337 # Juxta
-    - 501782173364518912 # Raticate
+    - "590430031281651722" # Traveler
+    - "546614210243854337" # Juxta
+    - "501782173364518912" # Raticate
 
-  mainGuild: 669934356172636199
-  testGuild: 725295821456801842
+  mainGuild: "669934356172636199"
+  testGuild: "725295821456801842"
 
-  testChannel      : 725295821456801845
-  mainChannel      : 669934356172636208
-  logChannel       : 838402956863733820
-  chatBackupChannel: 741556551143391323
-  editBackupChannel: 745569697013039105
+  testChannel      : "725295821456801845"
+  mainChannel      : "669934356172636208"
+  logChannel       : "838402956863733820"
+  chatBackupChannel: "741556551143391323"
+  editBackupChannel: "745569697013039105"
 
   ignoreChannels:
-    - 675956755112394753
-    - 703215004807069737
+    - "675956755112394753"
+    - "703215004807069737"
   ignoreKeywords:
     - "save"
     - "url"

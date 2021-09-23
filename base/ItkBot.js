@@ -8,12 +8,16 @@ class ItkBot extends Client {
   constructor(options) {
     super(options);
 
-    this.config = loadYaml(fs.readFileSync('./config.yml', 'utf-8'));
+    this.config = loadYaml(fs.readFileSync(options.configFile, 'utf-8'));
     this.commands = new Collection();
     this.slashCommands = new Collection();
   }
 
-  init({ commandFolder, slashFolder, eventFolder }) {
+  async init({ commandFolder, slashFolder, eventFolder }) {
+    let failCount = 0;
+    let successCount = 0;
+
+    // Load all commands
     const commandTable = new Table({ head: ['Category', 'Name', 'Success'] });
     const commandCategories = fs.readdirSync(commandFolder);
     commandCategories.forEach((category) => {
@@ -23,11 +27,13 @@ class ItkBot extends Client {
         .filter((file) => file.endsWith('js'));
       commandFiles.forEach((file) => {
         const loadSuccess = this.loadCommand(commandPath, file);
+        loadSuccess ? (successCount += 1) : (failCount += 1);
         commandTable.push([category, file, loadSuccess ? '✔️' : '❌']);
       });
     });
     console.log(commandTable.toString());
 
+    // Load all slash commands
     const slashTable = new Table({ head: ['Category', 'Name', 'Success'] });
     const slashCategories = fs.readdirSync(slashFolder);
     slashCategories.forEach((category) => {
@@ -37,20 +43,25 @@ class ItkBot extends Client {
         .filter((file) => file.endsWith('js'));
       slashFiles.forEach((file) => {
         const loadSuccess = this.loadSlash(slashPath, file);
+        loadSuccess ? (successCount += 1) : (failCount += 1);
         slashTable.push([category, file, loadSuccess ? '✔️' : '❌']);
       });
     });
     console.log(slashTable.toString());
 
+    // Load all events
     const eventTable = new Table({ head: ['Name', 'Success'] });
     const eventFiles = fs
       .readdirSync(eventFolder)
       .filter((file) => file.endsWith('js'));
     eventFiles.forEach((file) => {
       const loadSuccess = this.loadEvent(`${eventFolder}/${file}`);
+      loadSuccess ? (successCount += 1) : (failCount += 1);
       eventTable.push([file, loadSuccess ? '✔️' : '❌']);
     });
     console.log(eventTable.toString());
+
+    return { successCount, failCount };
   }
 
   loadCommand(commandPath, commandName) {
@@ -82,19 +93,6 @@ class ItkBot extends Client {
     }
   }
 
-  slashRegister(slashCommand) {
-    try {
-      if (!this.config.bot.testing)
-        this.application.commands.create(slashCommand);
-      this.guilds.cache
-        .get(this.config.bot.testGuildId)
-        ?.commands.create(slashCommand);
-      return true;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   loadSlash(slashPath, slashName) {
     try {
       const slash = require(`${slashPath}/${slashName}`);
@@ -103,9 +101,11 @@ class ItkBot extends Client {
       slash.dirname = slashPath;
       this.slashCommands.set(slash.name, slash);
 
-      this.isReady()
-        ? this.slashRegister(slash)
-        : this.on('ready', () => this.slashRegister(slash));
+      if (this.config.bot.testing)
+        this.guilds.cache
+          .get(this.config.bot.testGuild)
+          ?.commands.create(slash);
+      else this.application.commands.create(slash);
       return true;
     } catch (error) {
       console.error(error);
@@ -124,7 +124,7 @@ class ItkBot extends Client {
     }
 
     const guildCommand = this.guilds.cache.get(
-      this.config.bot.testGuildId
+      this.config.bot.testGuild
     )?.commands;
     await guildCommand.delete(
       guildCommand.cache.find((c) => c.name === slashName)
