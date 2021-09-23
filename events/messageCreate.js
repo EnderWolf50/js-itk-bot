@@ -1,10 +1,13 @@
 module.exports = (client) => {
   client.on('messageCreate', async (message) => {
-    if (!message.content.startsWith(client.config.prefix) || message.author.bot)
+    if (
+      !message.content.startsWith(client.config.bot.prefix) ||
+      message.author.bot
+    )
       return;
 
     const [commandName, ...args] = message.content
-      .slice(client.config.prefix.length)
+      .slice(client.config.bot.prefix.length)
       .trim()
       .split(/ +/g);
 
@@ -20,7 +23,7 @@ module.exports = (client) => {
       replyContent = `This command requires additional arguments to run`;
     else if (cmd.guildOnly && !message.guild)
       replyContent = `This command can only be used in the guild`;
-    else if (cmd.ownerOnly && message.author.id != client.config.ownerId)
+    else if (cmd.ownerOnly && message.author.id != client.config.bot.owner)
       replyContent = `This command can only be used by the owner`;
 
     if (replyContent) {

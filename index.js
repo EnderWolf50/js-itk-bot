@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
 const { Intents } = require('discord.js');
-const ItkBot = require('./base/ItkBot');
+const { ItkBot } = require('./base/ItkBot');
 
 dotenv.config();
 
@@ -13,10 +13,10 @@ const client = new ItkBot({
   ],
 });
 
-(async () => {
-  client.loadAllCommands(`${process.cwd()}/commands`);
-  client.loadAllEvents(`${process.cwd()}/events`);
-  client.loadAllSlashes(`${process.cwd()}/slashCommands`);
-})();
+client.init({
+  commandFolder: `${process.cwd()}/commands`,
+  slashFolder: `${process.cwd()}/slashCommands`,
+  eventFolder: `${process.cwd()}/events`,
+});
 
-client.login(process.env.TOKEN);
+client.login(client.config?.bot?.token ?? process.env.BOT_TOKEN);

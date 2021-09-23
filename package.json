@@ -1,6 +1,6 @@
 {
   "name": "discorditkbot",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Just a useless discord bot.",
   "main": "index.js",
   "scripts": {
@@ -9,9 +9,10 @@
   "author": "Kerati",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.2",
     "cli-table": "^0.3.6",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
-    "glob": "^7.1.7"
+    "js-yaml": "^4.1.0"
   }
 }
