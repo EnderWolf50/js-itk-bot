@@ -1,4 +1,5 @@
 const fs = require('fs');
+const chalk = require('chalk');
 const Table = require('cli-table');
 const { Collection } = require('discord.js');
 const { Client } = require('discord.js');
@@ -18,7 +19,7 @@ class ItkBot extends Client {
     let successCount = 0;
 
     // Load all commands
-    const commandTable = new Table({ head: ['Category', 'Name', 'Success'] });
+    const commandTable = new Table({ head: ['Category', 'Name', 'Status'] });
     const commandCategories = fs.readdirSync(commandFolder);
     commandCategories.forEach((category) => {
       const commandPath = `${commandFolder}/${category}`;
@@ -28,13 +29,17 @@ class ItkBot extends Client {
       commandFiles.forEach((file) => {
         const loadSuccess = this.loadCommand(commandPath, file);
         loadSuccess ? (successCount += 1) : (failCount += 1);
-        commandTable.push([category, file, loadSuccess ? '✔️' : '❌']);
+        commandTable.push([
+          category,
+          file,
+          loadSuccess ? chalk.green('Success') : chalk.red('Failed'),
+        ]);
       });
     });
     console.log(commandTable.toString());
 
     // Load all slash commands
-    const slashTable = new Table({ head: ['Category', 'Name', 'Success'] });
+    const slashTable = new Table({ head: ['Category', 'Name', 'Status'] });
     const slashCategories = fs.readdirSync(slashFolder);
     slashCategories.forEach((category) => {
       const slashPath = `${slashFolder}/${category}`;
@@ -44,20 +49,27 @@ class ItkBot extends Client {
       slashFiles.forEach((file) => {
         const loadSuccess = this.loadSlash(slashPath, file);
         loadSuccess ? (successCount += 1) : (failCount += 1);
-        slashTable.push([category, file, loadSuccess ? '✔️' : '❌']);
+        slashTable.push([
+          category,
+          file,
+          loadSuccess ? chalk.green('Success') : chalk.red('Failed'),
+        ]);
       });
     });
     console.log(slashTable.toString());
 
     // Load all events
-    const eventTable = new Table({ head: ['Name', 'Success'] });
+    const eventTable = new Table({ head: ['Name', 'Status'] });
     const eventFiles = fs
       .readdirSync(eventFolder)
       .filter((file) => file.endsWith('js'));
     eventFiles.forEach((file) => {
       const loadSuccess = this.loadEvent(`${eventFolder}/${file}`);
       loadSuccess ? (successCount += 1) : (failCount += 1);
-      eventTable.push([file, loadSuccess ? '✔️' : '❌']);
+      eventTable.push([
+        file,
+        loadSuccess ? chalk.green('Success') : chalk.red('Failed'),
+      ]);
     });
     console.log(eventTable.toString());
 
