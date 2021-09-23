@@ -58,6 +58,8 @@ class ItkBot extends Client {
       const command = require(`${commandPath}/${commandName}`);
       if (!command?.name) return;
 
+      if ('init' in command) command.init(this);
+
       command.dirname = commandPath;
       this.commands.set(command.name, command);
       return true;
@@ -82,9 +84,10 @@ class ItkBot extends Client {
 
   slashRegister(slashCommand) {
     try {
-      if (!this.config.testing) this.application.commands.create(slashCommand);
+      if (!this.config.bot.testing)
+        this.application.commands.create(slashCommand);
       this.guilds.cache
-        .get(this.config.testGuildId)
+        .get(this.config.bot.testGuildId)
         ?.commands.create(slashCommand);
       return true;
     } catch (error) {
@@ -113,7 +116,7 @@ class ItkBot extends Client {
     delete require.cache[require.resolve(`${slashPath}/${slashName}.js`)];
     this.slashCommands.delete(slashName);
 
-    if (!this.config.testing) {
+    if (!this.config.bot.testing) {
       const appCommand = this.application.commands;
       await appCommand.delete(
         appCommand.cache.find((c) => c.name === slashName)
@@ -121,7 +124,7 @@ class ItkBot extends Client {
     }
 
     const guildCommand = this.guilds.cache.get(
-      this.config.testGuildId
+      this.config.bot.testGuildId
     )?.commands;
     await guildCommand.delete(
       guildCommand.cache.find((c) => c.name === slashName)

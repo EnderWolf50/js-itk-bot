@@ -5,29 +5,36 @@ module.exports = {
   aliases: ['vote'],
   description: 'Hold a poll.',
   args: true,
+  init: (client) => {
+    this.pollReactionEmojis = [
+      ...client.config.styles.reactions.numbers,
+      ...client.config.styles.reactions.letters,
+    ];
+  },
   run: async ({ msg, args }) => {
     const [title, ...choices] = args;
 
-    const numberEmojis = [
-      '1\u20E3',
-      '2\u20E3',
-      '3\u20E3',
-      '4\u20E3',
-      '5\u20E3',
-      '6\u20E3',
-      '7\u20E3',
-      '8\u20E3',
-      '9\u20E3',
-    ];
+    if (!(1 <= choices.length && choices.length <= 20)) {
+      const repliedMsg = await msg.reply({
+        content: 'You must pass in 1 to 20 choices to make this command work',
+      });
+      setTimeout(() => {
+        msg.delete().catch(console.error);
+        repliedMsg.delete().catch(console.error);
+      }, 5000);
+      return;
+    }
 
-    let desc = '';
+    let embedDesc = '';
     choices.forEach((choice, index) => {
-      desc += `${numberEmojis[index]} ${choice}\n`;
+      embedDesc += `${this.pollReactionEmojis[index]} ${choice}\n`;
     });
-    const embed = new MessageEmbed({ description: desc });
-    const repliedMsg = await msg.reply({ content: title, embeds: [embed] });
+    const repliedMsg = await msg.reply({
+      content: title,
+      embeds: [new MessageEmbed({ description: embedDesc })],
+    });
     for (let i = 0; i < choices.length; i++) {
-      repliedMsg.react(numberEmojis[i]);
+      repliedMsg.react(this.pollReactionEmojis[i]);
     }
   },
 };

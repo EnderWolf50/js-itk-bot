@@ -1,5 +1,6 @@
 bot:
-  token: !ENV "BOT_TOKEN"
+  token  : !ENV "BOT_TOKEN"
+  testing: true
 
   prefix     : &BOT_PREFIX ";"
   name       : &BOT_NAME "Itk Bot"
@@ -12,19 +13,19 @@ bot:
     - 546614210243854337 # Juxta
     - 501782173364518912 # Raticate
 
-  main_guild: &main_guild 669934356172636199
-  test_guild: &test_guild 725295821456801842
+  mainGuild: 669934356172636199
+  testGuild: 725295821456801842
 
-  test_channel       : 725295821456801845
-  main_channel       : 669934356172636208
-  log_channel        : 838402956863733820
-  chat_backup_channel: 741556551143391323
-  edit_backup_channel: 745569697013039105
+  testChannel      : 725295821456801845
+  mainChannel      : 669934356172636208
+  logChannel       : 838402956863733820
+  chatBackupChannel: 741556551143391323
+  editBackupChannel: 745569697013039105
 
-  ignore_channels:
+  ignoreChannels:
     - 675956755112394753
     - 703215004807069737
-  ignore_keywords:
+  ignoreKeywords:
     - "save"
     - "url"
     - "programming"
@@ -36,16 +37,16 @@ bot:
     - "fs"
     - "dc"
 
-  image_folder: &IMAGE_FOLDER "./images/"
+  imageFolder: &IMAGE_FOLDER "./images/"
 
-  mongo_host             : !ENV "MONGO_HOST"
-  sauce_nao_key          : !ENV "SAUCE_NAO_KEY"
-  custom_search_engine_id: !ENV "CUSTOM_SEARCH_ENGINE_ID"
-  google_search_api_keys : !ENV
+  mongoHost           : !ENV "MONGO_HOST"
+  sauceNaoKey         : !ENV "SAUCE_NAO_KEY"
+  customSearchEngineId: !ENV "CUSTOM_SEARCH_ENGINE_ID"
+  googleSearchApiKeys : !ENV
     - "GOOGLE_SEARCH_API_KEY_1"
     - "GOOGLE_SEARCH_API_KEY_2"
     - "GOOGLE_SEARCH_API_KEY_3"
-  google_search_options:
+  googleSearchOptions:
     c2coff: 0             # Chinese results
     hl    : 'zh-TW'       # Interface lang
     gl    : 'tw'          # Geographic location
@@ -53,99 +54,81 @@ bot:
     safe  : 'off'         # Safe mode
 
 log:
-  sentry_dsn: !ENV "SENTRY_DSN"
-
-  log_level: 5
-
-  log_format : "%(asctime)s | %(name)s | %(levelname)-9s | %(message)s"
-  date_format: "%Y-%m-%d %H:%M:%S"
-  file_path  : "./logs"
-  file_name  : "discord_bot.log"
-
-  coloredlogs:
-    styles:
-      trace:
-        color: 246
-      debug:
-        color: 28
-      warning:
-        color: 220
-      critical:
-        background: "red"
+  sentryDsn: !ENV "SENTRY_DSN"
 
 styles:
   colors:
-    red         : &red 0xDB4A30
-    teal        : &teal 0x0F7173
-    blue        : &blue 0x5386E4
-    pink        : &pink 0xDA627D
-    cyan        : &cyan 0x66999B
-    green       : &green 0x8EA604
-    yellow      : &yellow 0xE9DF00
-    purple      : &purple 0x4D0D43
-    navy_blue   : &navy_blue 0x273469
-    dark_teal   : &dark_teal 0x113537
-    blue_gray   : &blue_gray 0x7798AB
-    dark_green  : &dark_green 0x34403A
-    olive_green : &olive_green 0xB1B695
-    light_yellow: &light_yellow 0xFCD992
+    red        : &red 0xDB4A30
+    teal       : &teal 0x0F7173
+    blue       : &blue 0x5386E4
+    pink       : &pink 0xDA627D
+    cyan       : &cyan 0x66999B
+    green      : &green 0x8EA604
+    yellow     : &yellow 0xE9DF00
+    purple     : &purple 0x4D0D43
+    navyBlue   : &navyBlue 0x273469
+    darkTeal   : &darkTeal 0x113537
+    blueGray   : &blueGray 0x7798AB
+    darkGreen  : &darkGreen 0x34403A
+    oliveGreen : &oliveGreen 0xB1B695
+    lightYellow: &lightYellow 0xFCD992
 
   emojis:
-    i11_chiwawa: &i11_chiwawa "<:i11_chiwawa:783346447319171075>"
+    i11Chiwawa: &i11Chiwawa "<:i11_chiwawa:783346447319171075>"
 
-    helen_1  : &helen_1 "<:helen_1:838343516743532554>"
-    helen_2  : &helen_2 "<:helen_2:838343516895182848>"
-    helen_3  : &helen_3 "<:helen_3:838343516865298442>"
-    helen_4  : &helen_4 "<:helen_4:838343516374564885>"
-    helen_5  : &helen_5 "<:helen_5:838343517033725992>"
-    helen_6  : &helen_6 "<:helen_6:838343517037133847>"
-    helen_7  : &helen_7 "<:helen_7:838343517037264896>"
-    helen_art: &helen_art "<:helen_art:838378914472263701>"
+    helen1  : &helen1 "<:helen_1:838343516743532554>"
+    helen2  : &helen2 "<:helen_2:838343516895182848>"
+    helen3  : &helen3 "<:helen_3:838343516865298442>"
+    helen4  : &helen4 "<:helen_4:838343516374564885>"
+    helen5  : &helen5 "<:helen_5:838343517033725992>"
+    helen6  : &helen6 "<:helen_6:838343517037133847>"
+    helen7  : &helen7 "<:helen_7:838343517037264896>"
+    helenArt: &helenArt "<:helen_art:838378914472263701>"
 
     helens:
-      - *helen_1
-      - *helen_2
-      - *helen_3
-      - *helen_4
-      - *helen_5
-      - *helen_6
-      - *helen_7
+      - *helen1
+      - *helen2
+      - *helen3
+      - *helen4
+      - *helen5
+      - *helen6
+      - *helen7
 
     thonk: &thonk "<:thonk:781092810572562432>"
 
     # Pepe
-    bongo_pepe        : &bongo_pepe "<a:bongo_pepe:823225627259699237>"
-    pepe_coffee       : &pepe_coffee "<:pepe_coffee:823454537305030657>"
-    pepe_coin         : &pepe_coin "<a:pepe_coin:823235418529988659>"
-    pepe_cross        : &pepe_cross "<:pepe_cross:823453075095158804>"
-    pepe_crown_flip   : &pepe_crown_flip "<a:pepe_crown_flip:823468015412707338>"
-    pepe_depressed    : &pepe_depressed "<:pepe_depressed:823472210349391873>"
-    pepe_facepalm     : &pepe_facepalm "<:pepe_facepalm:823196602122108959>"
-    pepe_hands        : &pepe_hands "<:pepe_hands:823446764378914836>"
-    pepe_hmm          : &pepe_hmm "<:pepe_hmm:823444896115458060>"
-    pepe_hypers       : &pepe_hypers "<:pepe_hypers:838345805323960330>"
-    pepe_monkaS       : &pepe_monkaS "<:pepe_monkaS:823445833735208980>"
-    pepe_monkaSTEER   : &pepe_monkaSTEER "<a:pepe_monkaSTEER:823470686650499092>"
-    pepe_nitro        : &pepe_nitro "<a:pepe_nitro:823467488930037761>"
-    pepe_nopes        : &pepe_nopes "<a:pepe_nopes:823465237311127562>"
-    pepe_pog_champ    : &pepe_pog_champ "<:pepe_pog_champ:838461034275799061>"
-    pepe_px           : &pepe_px "<a:pepe_pixel:823467770389331978>"
-    pepe_px_xmas      : &pepe_px_xmas "<a:pepe_pixel_christmas:823470432803356683>"
-    pepe_saber        : &pepe_saber "<a:pepe_saber:823467708217425930>"
-    pepe_sad          : &pepe_sad "<:pepe_sad:823456479591530507>"
-    pepe_sadge        : &pepe_sadge "<:pepe_sadge:823456522696392705>"
-    pepe_simp         : &pepe_simp "<:pepe_simp:823448668198797313>"
-    pepe_sus          : &pepe_sus "<:pepe_sus:823451080942682153>"
-    rainbow_pepe_angry: &rainbow_pepe_angry "<a:rainbow_pepe_angry:823463476440727562>"
-    rainbow_pepe_happy: &rainbow_pepe_happy "<a:rainbow_pepe_happy:823463330131738624>"
+    bongoPepe       : &bongoPepe "<a:bongo_pepe:823225627259699237>"
+    pepeCoffee      : &pepeCoffee "<:pepe_coffee:823454537305030657>"
+    pepeCoin        : &pepeCoin "<a:pepe_coin:823235418529988659>"
+    pepeCross       : &pepeCross "<:pepe_cross:823453075095158804>"
+    pepeCrownFlip   : &pepeCrownFlip "<a:pepe_crown_flip:823468015412707338>"
+    pepeDepressed   : &pepeDepressed "<:pepe_depressed:823472210349391873>"
+    pepeFacepalm    : &pepeFacepalm "<:pepe_facepalm:823196602122108959>"
+    pepeHands       : &pepeHands "<:pepe_hands:823446764378914836>"
+    pepeHmm         : &pepeHmm "<:pepe_hmm:823444896115458060>"
+    pepeHypers      : &pepeHypers "<:pepeHypers:838345805323960330>"
+    pepeMonkaS      : &pepeMonkaS "<:pepe_monkaS:823445833735208980>"
+    pepeMonkaSteer  : &pepeMonkaSteer "<a:pepe_monkaSTEER:823470686650499092>"
+    pepeNitro       : &pepeNitro "<a:pepe_nitro:823467488930037761>"
+    pepeNopes       : &pepeNopes "<a:pepe_nopes:823465237311127562>"
+    pepePogChamp    : &pepePogChamp "<:pepe_pog_champ:838461034275799061>"
+    pepePx          : &pepePx "<a:pepe_pixel:823467770389331978>"
+    pepePxXmas      : &pepePxXmas "<a:pepe_pixel_christmas:823470432803356683>"
+    pepeSaber       : &pepeSaber "<a:pepe_saber:823467708217425930>"
+    pepeSad         : &pepeSad "<:pepe_sad:823456479591530507>"
+    pepeSadge       : &pepeSadge "<:pepe_sadge:823456522696392705>"
+    pepeSimp        : &pepeSimp "<:pepe_simp:823448668198797313>"
+    pepeSus         : &pepeSus "<:pepe_sus:823451080942682153>"
+    rainbowPepeAngry: &rainbowPepeAngry "<a:rainbow_pepe_angry:823463476440727562>"
+    rainbowPepeHappy: &rainbowPepeHappy "<a:rainbow_pepe_happy:823463330131738624>"
 
   reactions:
-    prev_page : "<:prev_page:805002492848767017>"
-    next_page : "<:next_page:805002492525805589>"
-    first_page: "<:first_page:806497548343705610>"
-    last_page : "<:last_page:806497548558532649>"
-    check_mark: "\u2705"
-    cross_mark: "\u274E"
+    prevPage : "<:prev_page:805002492848767017>"
+    nextPage : "<:next_page:805002492525805589>"
+    firstPage: "<:first_page:806497548343705610>"
+    lastPage : "<:last_page:806497548558532649>"
+    checkMark: "\u2705"
+    crossMark: "\u274E"
     numbers:
       - "1\u20E3"
       - "2\u20E3"
@@ -157,38 +140,38 @@ styles:
       - "8\u20E3"
       - "9\u20E3"
     letters:
-      - "\u1F1E6"
-      - "\u1F1E7"
-      - "\u1F1E8"
-      - "\u1F1E9"
-      - "\u1F1EA"
-      - "\u1F1EB"
-      - "\u1F1EC"
-      - "\u1F1ED"
-      - "\u1F1EE"
-      - "\u1F1EF"
-      - "\u1F1F0"
-      - "\u1F1F1"
-      - "\u1F1F2"
-      - "\u1F1F3"
-      - "\u1F1F4"
-      - "\u1F1F5"
-      - "\u1F1F6"
-      - "\u1F1F7"
-      - "\u1F1F8"
-      - "\u1F1F9"
-      - "\u1F1FA"
-      - "\u1F1FB"
-      - "\u1F1FC"
-      - "\u1F1FD"
-      - "\u1F1FE"
-      - "\u1F1FF"
+      - "\uD83C\uDDE6"
+      - "\uD83C\uDDE7"
+      - "\uD83C\uDDE8"
+      - "\uD83C\uDDE9"
+      - "\uD83C\uDDEA"
+      - "\uD83C\uDDEB"
+      - "\uD83C\uDDEC"
+      - "\uD83C\uDDED"
+      - "\uD83C\uDDEE"
+      - "\uD83C\uDDEF"
+      - "\uD83C\uDDF0"
+      - "\uD83C\uDDF1"
+      - "\uD83C\uDDF2"
+      - "\uD83C\uDDF3"
+      - "\uD83C\uDDF4"
+      - "\uD83C\uDDF5"
+      - "\uD83C\uDDF6"
+      - "\uD83C\uDDF7"
+      - "\uD83C\uDDF8"
+      - "\uD83C\uDDF9"
+      - "\uD83C\uDDFA"
+      - "\uD83C\uDDFB"
+      - "\uD83C\uDDFC"
+      - "\uD83C\uDDFD"
+      - "\uD83C\uDDFE"
+      - "\uD83C\uDDFF"
 
-help_messages:
+helpMessages:
   help:
     title      : "看看是哪個小可憐忘記指令怎麼打啦？"
     description: ".help <指令> 可以查看更詳細的說明"
-    color      : *light_yellow
+    color      : *lightYellow
     author     : *BOT_NAME
     footer     : "那個...窩不知道"
     fields:
@@ -217,7 +200,7 @@ help_messages:
     description: "別名：無"
     color      : *teal
     author     : *BOT_NAME
-    footer     : !JOIN ["今天要來點小", *i11_chiwawa, "嗎？"]
+    footer     : !JOIN ["今天要來點小", *i11Chiwawa, "嗎？"]
     fields:
       - - !JOIN [*BOT_PREFIX, "bzz"]
         - "沒什麼特別的，就是回覆給你一個運勢"
@@ -226,7 +209,7 @@ help_messages:
     description: "別名：無"
     color      : *blue
     author     : *BOT_NAME
-    footer     : !JOIN ["今天要來點大", *i11_chiwawa, "嗎？"]
+    footer     : !JOIN ["今天要來點大", *i11Chiwawa, "嗎？"]
     fields:
       - - !JOIN [*BOT_PREFIX, "tdbzz"]
         - "回覆給你一個運勢，此運勢會在 00:00 (GMT+8) 時重置"
@@ -349,7 +332,7 @@ help_messages:
   clean:
     title      : !JOIN [*BOT_PREFIX, "clean [天數]"]
     description: "別名：無"
-    color      : *blue_gray
+    color      : *blueGray
     author     : *BOT_NAME
     footer     : "黑人消失.gif"
     fields:
@@ -360,7 +343,7 @@ help_messages:
   image_search:
     title      : !JOIN [*BOT_PREFIX, "image_search [網址]..."]
     description: "別名：`is`"
-    color      : *blue_gray
+    color      : *blueGray
     author     : *BOT_NAME
     footer     : "is 怪欸"
     fields:
@@ -370,24 +353,24 @@ help_messages:
         - "圖片網址，須為`.jpg`|`.png`|`.jpeg`結尾"
 
 events:
-  helen_art: *helen_art
-  fake     : !JOIN [*IMAGE_FOLDER, "fake.gif"]
-  tang     : !JOIN [*IMAGE_FOLDER, "tang.jpg"]
-  scared   : !JOIN [*IMAGE_FOLDER, "scared.jpg"]
-  chen     : !JOIN [*IMAGE_FOLDER, "chen_heal.png"]
-  flaming  : !JOIN [*IMAGE_FOLDER, "flaming.jpg"]
-  you_bad  : !JOIN [*IMAGE_FOLDER, "you_bad.png"]
-  ck_lewd  : !JOIN [*IMAGE_FOLDER, "ck_lewd.jpg"]
-  arkn     : !JOIN [*IMAGE_FOLDER, "arkn_materials.png"]
-  trap_card: !JOIN [*IMAGE_FOLDER, "helen_trap_card.gif"]
-  make_friends:
+  helenArt: *helenArt
+  fake    : !JOIN [*IMAGE_FOLDER, "fake.gif"]
+  tang    : !JOIN [*IMAGE_FOLDER, "tang.jpg"]
+  scared  : !JOIN [*IMAGE_FOLDER, "scared.jpg"]
+  flaming : !JOIN [*IMAGE_FOLDER, "flaming.jpg"]
+  youBad  : !JOIN [*IMAGE_FOLDER, "you_bad.png"]
+  ck_lewd : !JOIN [*IMAGE_FOLDER, "ck_lewd.jpg"]
+  chen    : !JOIN [*IMAGE_FOLDER, "chen_heal.png"]
+  arkn    : !JOIN [*IMAGE_FOLDER, "arkn_materials.png"]
+  trapCard: !JOIN [*IMAGE_FOLDER, "helen_trap_card.gif"]
+  makeFriends:
     - !JOIN [*IMAGE_FOLDER, "make_friends.jpg"]
     - !JOIN [*IMAGE_FOLDER, "make_friends_gg.jpg"]
     - !JOIN [*IMAGE_FOLDER, "make_friends_gg_thicc.jpg"]
-  so_hot:
+  soHot:
     - !JOIN [*IMAGE_FOLDER, "so_hot.jpg"]
     - !JOIN [*IMAGE_FOLDER, "so_hot_sumei.png"]
-  magic_conch:
+  magicConch:
     kw:
       - !JOIN [*IMAGE_FOLDER, "magic_conch_why.jpg"]
       - !JOIN [*IMAGE_FOLDER, "magic_conch_wow.jpg"]
@@ -415,7 +398,7 @@ events:
     - !JOIN [*IMAGE_FOLDER, "yeah_no.jpg"]
     - !JOIN [*IMAGE_FOLDER, "yeah_san_xiao.jpg"]
     - !JOIN [*IMAGE_FOLDER, "yeah_starburst.jpg"]
-  mentioned_reply:
+  mentionedReply:
     - "蛤"
     - "笑死"
     - "嗷？"
@@ -432,23 +415,23 @@ events:
     - "嘿嘿嘿嘿嘿"
     - ":thinking:"
     - "¯\\_(ツ)_/¯"
-    - *helen_2
-    - *helen_3
-    - *helen_5
-    - *helen_6
-    - *helen_7
-    - !JOIN ["我就爛 ", *pepe_hypers]
-    - !JOIN ["我想要那個 donut ", *helen_4]
-    - !JOIN ["給我那個 donut 好嗎 ", *helen_1]
-  act_cute:
-    - *helen_1
-    - *helen_2
-    - *helen_3
-    - *helen_4
-    - *helen_5
-    - *helen_6
-    - *helen_7
-  helen_cards:
+    - *helen2
+    - *helen3
+    - *helen5
+    - *helen6
+    - *helen7
+    - !JOIN ["我就爛 ", *pepeHypers]
+    - !JOIN ["我想要那個 donut ", *helen4]
+    - !JOIN ["給我那個 donut 好嗎 ", *helen1]
+  actCute:
+    - *helen1
+    - *helen2
+    - *helen3
+    - *helen4
+    - *helen5
+    - *helen6
+    - *helen7
+  helenCards:
     - !JOIN [*IMAGE_FOLDER, "helen_black_mage.png"]
     - !JOIN [*IMAGE_FOLDER, "helen_blue_eye_dragon.png"]
     - !JOIN [*IMAGE_FOLDER, "helen_eagle.png"]
@@ -469,7 +452,7 @@ events:
     - !JOIN [*IMAGE_FOLDER, "helen_sword.png"]
     - !JOIN [*IMAGE_FOLDER, "helen_warrior.png"]
     - !JOIN [*IMAGE_FOLDER, "helen_water.png"]
-  loading_cat:
+  loadingCat:
     - !JOIN [
         "<:ldc_01:725343128986320916>",
         "<:ldc_02:725343129011486761>",
@@ -521,11 +504,11 @@ fun:
       - "大吉"
       - "吉掰"
       - "大吉掰"
-      - *i11_chiwawa
+      - *i11Chiwawa
   tdbzz:
     options: *BZZ_OPTIONS
 
 tasks:
-  left_ten_seconds: !JOIN [*IMAGE_FOLDER, "left_ten_seconds.png"]
-  left_three_hours: !JOIN [*IMAGE_FOLDER, "left_three_hours.jpg"]
-  three_oclock    : !JOIN [*IMAGE_FOLDER, "three_oclock.png"]
+  leftTenSeconds: !JOIN [*IMAGE_FOLDER, "left_ten_seconds.png"]
+  leftThreeHours: !JOIN [*IMAGE_FOLDER, "left_three_hours.jpg"]
+  threeOclock   : !JOIN [*IMAGE_FOLDER, "three_oclock.png"]
