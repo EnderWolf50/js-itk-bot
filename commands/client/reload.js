@@ -3,7 +3,7 @@ module.exports = {
   description: 'Nothing but a command that can reload the specified command.',
   args: true,
   ownerOnly: true,
-  run: async ({ client, msg, args }) => {
+  run: async ({ client, message, args }) => {
     const [type, name] = args;
 
     let replyContent;
@@ -34,9 +34,9 @@ module.exports = {
         replyContent = `Unknown command type ${type}`;
     }
 
-    const repliedMsg = await msg.reply({ content: replyContent });
+    const repliedMsg = await message.reply({ content: replyContent });
     setTimeout(() => {
-      msg.delete().catch(console.log);
+      message.delete().catch(console.log);
       repliedMsg.delete().catch(console.log);
     }, 5000);
   },

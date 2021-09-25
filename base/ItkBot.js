@@ -1,10 +1,8 @@
 const fs = require('fs');
 const chalk = require('chalk');
 const Table = require('cli-table');
-const { Collection } = require('discord.js');
-const { Client } = require('discord.js');
+const { Client, Collection } = require('discord.js');
 const { loadYaml } = require('../helpers/config.js');
-
 class ItkBot extends Client {
   constructor(options) {
     super(options);
@@ -32,7 +30,7 @@ class ItkBot extends Client {
         commandTable.push([
           category,
           file,
-          loadSuccess ? chalk.green('Success') : chalk.red('Failed'),
+          loadSuccess ? chalk.green('SUCCESS') : chalk.red('FAILED'),
         ]);
       });
     });
@@ -52,7 +50,7 @@ class ItkBot extends Client {
         slashTable.push([
           category,
           file,
-          loadSuccess ? chalk.green('Success') : chalk.red('Failed'),
+          loadSuccess ? chalk.green('SUCCESS') : chalk.red('FAILED'),
         ]);
       });
     });
@@ -68,7 +66,7 @@ class ItkBot extends Client {
       loadSuccess ? (successCount += 1) : (failCount += 1);
       eventTable.push([
         file,
-        loadSuccess ? chalk.green('Success') : chalk.red('Failed'),
+        loadSuccess ? chalk.green('SUCCESS') : chalk.red('FAILED'),
       ]);
     });
     console.log(eventTable.toString());
@@ -105,6 +103,11 @@ class ItkBot extends Client {
     }
   }
 
+  async unloadEvent(eventPath, eventName) {
+    delete require.cache[require.resolve(`${eventPath}/${eventName}.js`)];
+    this.commands.delete(eventName);
+  }
+
   loadSlash(slashPath, slashName) {
     try {
       const slash = require(`${slashPath}/${slashName}`);
@@ -113,11 +116,14 @@ class ItkBot extends Client {
       slash.dirname = slashPath;
       this.slashCommands.set(slash.name, slash);
 
-      if (this.config.bot.testing)
-        this.guilds.cache
-          .get(this.config.bot.testGuild)
-          ?.commands.create(slash);
-      else this.application.commands.create(slash);
+      if (this.config.bot.testing || slash.guilds)
+        slash.guilds = [...(slash.guilds || []), this.config.bot.testGuild];
+
+      slash.guilds
+        ? slash.guilds?.forEach((guild) =>
+            this.application.commands.create(slash, guild)
+          )
+        : this.application.commands.create(slash);
       return true;
     } catch (error) {
       console.error(error);

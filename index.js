@@ -6,7 +6,7 @@ const { ItkBot } = require('./base/ItkBot');
 dotenv.config();
 
 const client = new ItkBot({
-  intents: [
+  intents: 32767 ?? [
     Intents.FLAGS.GUILDS,
     Intents.FLAGS.GUILD_MESSAGES,
     Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
@@ -19,9 +19,9 @@ client.login(client.config.bot.token ?? process.env.BOT_TOKEN);
 
 client.on('ready', async () => {
   const { successCount, failCount } = await client.init({
-    commandFolder: `${process.cwd()}/commands`,
-    slashFolder: `${process.cwd()}/slashCommands`,
-    eventFolder: `${process.cwd()}/events`,
+    commandFolder: `${__dirname}/commands`,
+    slashFolder: `${__dirname}/slashCommands`,
+    eventFolder: `${__dirname}/events`,
   });
   console.log(
     chalk`{cyan The initialize ends up w/ {green ${successCount} success(es)} and {red ${failCount} fail(s)}}`

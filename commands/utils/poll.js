@@ -11,15 +11,15 @@ module.exports = {
       ...client.config.styles.reactions.letters,
     ];
   },
-  run: async ({ msg, args }) => {
+  run: async ({ message, args }) => {
     const [title, ...choices] = args;
 
     if (!(1 <= choices.length && choices.length <= 20)) {
-      const repliedMsg = await msg.reply({
+      const repliedMsg = await message.reply({
         content: 'You must pass in 1 to 20 choices to make this command work',
       });
       setTimeout(() => {
-        msg.delete().catch(console.error);
+        message.delete().catch(console.error);
         repliedMsg.delete().catch(console.error);
       }, 5000);
       return;
@@ -29,7 +29,7 @@ module.exports = {
     choices.forEach((choice, index) => {
       embedDesc += `${this.pollReactionEmojis[index]} ${choice}\n`;
     });
-    const repliedMsg = await msg.reply({
+    const repliedMsg = await message.reply({
       content: title,
       embeds: [new MessageEmbed({ description: embedDesc })],
     });

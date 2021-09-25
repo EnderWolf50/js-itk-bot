@@ -8,8 +8,13 @@ module.exports = (client) => {
           ephemeral: true,
         });
       }
+
+      const subcommandGroup = interaction.options.getSubcommandGroup(false);
+      const subcommand = interaction.options.getSubcommand(false);
+      const options = interaction.options._hoistedOptions;
+
       try {
-        cmd.run({ client: client, interaction: interaction });
+        cmd.run({ client, interaction, subcommandGroup, subcommand, options });
       } catch (error) {
         console.error(error);
       }

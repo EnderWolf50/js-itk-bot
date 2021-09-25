@@ -35,6 +35,6 @@ module.exports = (client) => {
       });
     }
 
-    await cmd.run({ client: client, msg: message, args: args });
+    await cmd.run({ client, message, args });
   });
 };
