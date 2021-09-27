@@ -1,6 +1,9 @@
 bot:
-  token  : !ENV "BOT_TOKEN"
   testing: true
+
+  token        : !ENV "BOT_TOKEN"
+  publicKey    : !ENV "BOT_PUBLIC_KEY"
+  applicationID: !ENV "BOT_APPLICATION_ID"
 
   prefix     : &BOT_PREFIX ";"
   name       : &BOT_NAME "Itk Bot"

@@ -13,6 +13,7 @@
     "cli-table": "^0.3.6",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "slash-create": "^4.2.0"
   }
 }
