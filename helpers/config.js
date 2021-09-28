@@ -1,4 +1,4 @@
-const yaml = require('js-yaml')
+const yaml = require('js-yaml');
 
 const CUSTOM_SCHEMA = yaml.DEFAULT_SCHEMA.extend([
   new yaml.Type('!ENV', {
@@ -13,8 +13,8 @@ const CUSTOM_SCHEMA = yaml.DEFAULT_SCHEMA.extend([
     kind: 'sequence',
     construct: (data) => data.join(''),
   }),
-])
+]);
 
-const loadYaml = (file, options) => yaml.load(file, { schema: CUSTOM_SCHEMA, ...options })
+const loadYaml = (file, options) => yaml.load(file, { schema: CUSTOM_SCHEMA, ...options });
 
-module.exports = { loadYaml }
+module.exports = { loadYaml };

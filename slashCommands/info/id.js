@@ -1,5 +1,5 @@
-const { CommandOptionType, SlashCommand } = require('slash-create')
-const { client } = require('../..')
+const { CommandOptionType, SlashCommand } = require('slash-create');
+const { client } = require('../..');
 
 module.exports = class extends SlashCommand {
   constructor(creator) {
@@ -61,40 +61,40 @@ module.exports = class extends SlashCommand {
         },
       ],
       guildIDs: client.config.bot.testing ? [client.config.bot.testGuild] : undefined,
-    })
-    this.filePath = __filename
+    });
+    this.filePath = __filename;
   }
 
   async run(ctx) {
-    const guild = client.guilds.cache.get(ctx.guildID)
-    const category = ctx.subcommands[0]
+    const guild = client.guilds.cache.get(ctx.guildID);
+    const category = ctx.subcommands[0];
     switch (category) {
       case 'user': {
         const member = guild.members.cache.get(ctx.options.user.user)
-          ?? (await guild.members.fetch(ctx.options.user.user))
-        ctx.send(`🔎 | The id of **${member}** is **${member.id}**`)
-        return
+          ?? (await guild.members.fetch(ctx.options.user.user));
+        ctx.send(`🔎 | The id of **${member}** is **${member.id}**`);
+        return;
       }
       case 'channel': {
         const channel = guild.channels.cache.get(ctx.options.channel.channel)
-          ?? (await guild.channels.fetch(ctx.options.channel.channel))
-        ctx.send(`🔎 | The id of **${channel}** is **${channel.id}**`)
-        return
+          ?? (await guild.channels.fetch(ctx.options.channel.channel));
+        ctx.send(`🔎 | The id of **${channel}** is **${channel.id}**`);
+        return;
       }
       case 'role': {
         const role = guild.roles.cache.get(ctx.options.role.role)
-          ?? (await guild.roles.fetch(ctx.options.role.role))
-        ctx.send(`🔎 | The id of **${role}** is **${role.id}**`)
-        return
+          ?? (await guild.roles.fetch(ctx.options.role.role));
+        ctx.send(`🔎 | The id of **${role}** is **${role.id}**`);
+        return;
       }
       case 'emoji': {
-        const emojiMatch = /^<a?:.*?:(.*?)>/.exec(ctx.options.emoji.emoji)
+        const emojiMatch = /^<a?:.*?:(.*?)>/.exec(ctx.options.emoji.emoji);
         if (!emojiMatch) {
-          ctx.send(`❌ | Id of ${ctx.options.emoji.emoji} not found!`)
-          return
+          ctx.send(`❌ | Id of ${ctx.options.emoji.emoji} not found!`);
+          return;
         }
-        ctx.send(`🔎 | The id of **${emojiMatch[0]}** is **${emojiMatch[1]}**`)
+        ctx.send(`🔎 | The id of **${emojiMatch[0]}** is **${emojiMatch[1]}**`);
       }
     }
   }
-}
+};
